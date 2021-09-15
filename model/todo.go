@@ -6,11 +6,11 @@ import (
 
 //ToDo Model
 type Todo struct {
-	ID        int    `json:"id"`
-	Title     string `json:"title"`
-	Status    bool   `json:"status"`
+	dao.Model
+	ID     int    `json:"id"`
+	Title  string `json:"title"`
+	Status bool   `json:"status"`
 }
-
 
 func CreateAToDo(todo *Todo) (err error) {
 	err = dao.DB.Create(&todo).Error

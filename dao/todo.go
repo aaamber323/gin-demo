@@ -12,10 +12,10 @@ var (
 )
 
 type Model struct {
-	ID        uint `gorm:"primary_key"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt *time.Time `gorm:"column:deleted"`
+	ID        int64      `gorm:"primary_key" json:"id"`
+	CreatedAt time.Time  `json:"created_at"`
+	UpdatedAt time.Time  `json:"updated_at"`
+	DeletedAt *time.Time `gorm:"column:deleted" json:"deleted_at"`
 }
 
 func InitMySQL() (err error) {

@@ -3,6 +3,7 @@ package controller
 import (
 	"gin-demo/model"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -40,12 +41,15 @@ func GetAllTodo(c *gin.Context) {
 }
 
 func UpdateATodo(c *gin.Context) {
-	id, ok := c.Params.Get("id")
+	var appID int64
+	PrameID, ok := c.Params.Get("id")
 	if !ok {
 		c.JSON(http.StatusOK, gin.H{"error": "无效的id"})
 		return
 	}
-	todo, err := model.GetATodo(id)
+	id, _ := strconv.Atoi(PrameID)
+	appID = int64(id)
+	todo, err := model.GetATodo(appID)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
 	}
@@ -59,17 +63,20 @@ func UpdateATodo(c *gin.Context) {
 }
 
 func DeleteATodo(c *gin.Context) {
-	id, ok := c.Params.Get("id")
+	var appID int64
+	ParamID, ok := c.Params.Get("id")
 	if !ok {
 		c.JSON(http.StatusOK, gin.H{"error": "无效的id"})
 		return
 	}
-	err := model.DeleteATodo(id)
+	id, _ := strconv.Atoi(ParamID)
+	appID = int64(id)
+	err := model.DeleteATodo(appID)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
 	} else {
 		c.JSON(http.StatusOK, gin.H{
-			id: "deleted",
+			ParamID: "deleted",
 		})
 	}
 
